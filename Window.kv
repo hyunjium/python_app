@@ -1,0 +1,164 @@
+WindowManager:
+    MainWindow:
+    CroWindow:
+    CrocWindow:
+
+<Button>
+    font_size: 30
+    pos_hint: {'center_x': .5}
+    size_hint: (1, .5)
+
+
+<MainWindow>:
+    name : "main"
+
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+
+        padding: 40
+        spacing: 15
+
+        Label:
+            id: choose_label
+            text: "Choose a game!"
+            font_size: 40
+            color: (13/255, 133/255, 0, 1)
+            bold: True
+            italic: True
+
+
+        RoundedButton:
+            text: "Lotto number"
+
+        RoundedButton:
+            text: "Roulette"
+
+        RoundedButton:
+            text: "Crocodile"
+            on_release:
+                app.root.current = "cro"
+                root.manager.transition.direction = "left"
+
+
+<CroWindow>:
+    name : "cro"
+
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+
+        Button:
+            text: "<"
+            size_hint: (None, None)
+            size: (40,40)
+            pos_hint: {"x":0}
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
+
+        BackgroundBoxLayout:
+            background_image: 'images/cro_open.jpg'
+            RelativeLayout:
+                Button:
+                    background_color: (1,1,1,0)
+                    size_hint: (0.14, 0.08)
+                    pos_hint: {"x":0.07, "y":0.35}
+                    on_release:
+                        app.root.current = "croc"
+                        root.manager.transition.direction = "left"
+                    #on_press: self.background_color= (1,0,0,1)
+                Button:
+                    background_color: (1,1,1,0)
+                    size_hint: (0.14, 0.08)
+                    pos_hint: {"x":0.05, "y":0.25}
+                    on_press: self.background_color= (1,0,0,1)
+                Button:
+                    background_color: (1,1,1,0)
+                    size_hint: (0.14, 0.08)
+                    pos_hint: {"x":0.05, "y":0.155}
+                    on_press: self.background_color= (1,0,0,1)
+                Button:
+                    background_color: (1,1,1,0)
+                    size_hint: (0.14, 0.08)
+                    pos_hint: {"x":0.13, "y":0.07}
+                    on_press: self.background_color= (1,0,0,1)
+                Button:
+                    background_color: (1,1,1,0)
+                    size_hint: (0.14, 0.08)
+                    pos_hint: {"x":0.33, "y":0.05}
+                    on_press: self.background_color= (1,0,0,1)
+                Button:
+                    background_color: (1,1,1,0)
+                    size_hint: (0.14, 0.08)
+                    pos_hint: {"x":0.55, "y":0.05}
+                    on_press: self.background_color= (1,0,0,1)
+                Button:
+                    background_color: (1,1,1,0)
+                    size_hint: (0.14, 0.08)
+                    pos_hint: {"x":0.74, "y":0.07}
+                    on_press: self.background_color= (1,0,0,1)
+                Button:
+                    background_color: (1,1,1,0)
+                    size_hint: (0.14, 0.08)
+                    pos_hint: {"x":0.82, "y":0.155}
+                    on_press: self.background_color= (1,0,0,1)
+                Button:
+                    background_color: (1,1,1,0)
+                    size_hint: (0.14, 0.08)
+                    pos_hint: {"x":0.81, "y":0.25}
+                    on_press: self.background_color= (1,0,0,1)
+                Button:
+                    background_color: (1,1,1,0)
+                    size_hint: (0.14, 0.08)
+                    pos_hint: {"x":0.8, "y":0.35}
+                    on_press: self.background_color= (1,0,0,1)
+
+
+<CrocWindow>:
+    name : "croc"
+
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+
+        Button:
+            text: "<"
+            size_hint: (None, None)
+            size: (40,40)
+            pos_hint: {"x":0}
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
+
+        BackgroundBoxLayout:
+            background_image: 'images/cro_close.jpg'
+            RelativeLayout:
+                Button:
+                    background_color: (1,1,1,0)
+                    size_hint: (0.25, 0.14)
+                    pos_hint: {"x":0.38, "y":0.14}
+                    on_release:
+                        app.root.current = "cro"
+                        root.manager.transition.direction = "right"
+                    #on_press: self.background_color= (1,0,0,1)
+
+
+<RoundedButton@Button>
+    background_color: (0,0,0,0)
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (0, 194/255, 142/255, 1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [50]
+
+<BackgroundBoxLayout@BoxLayout>:
+    background_image: 'images/cro_open.jpg'
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: self.background_image

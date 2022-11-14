@@ -1,9 +1,15 @@
+WindowManager:
+    MainWindow:
+    CroWindow:
+
 <Button>
     font_size: 30
     pos_hint: {'center_x': .5}
     size_hint: (1, .5)
 
-<MyLayout>
+
+<MainWindow>:
+    name : "main"
 
     BoxLayout:
         orientation: "vertical"
@@ -13,6 +19,7 @@
         spacing: 15
 
         Label:
+            id: choose_label
             text: "Choose a game!"
             font_size: 40
             color: (13/255, 133/255, 0, 1)
@@ -22,26 +29,64 @@
 
         RoundedButton:
             text: "Lotto number"
-            #size_hint_y = None
-            #height = 50
-            #size_hint_x = None
-            #width = 200
-            #pos_hint: {'center_x': 0.5}
-            #size_hint: (1, .3)
-            on_press: print("Goodbye!")
 
-
-        Button:
+        RoundedButton:
             text: "Roulette"
 
-        Button:
+        RoundedButton:
             text: "Crocodile"
+            on_release:
+                app.root.current = "cro"
+                root.manager.transition.direction = "left"
 
+
+<CroWindow>:
+    name : "cro"
+
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+
+        GridLayout:
+            #orientation: "vertical"
+            #size: root.width, root.height
+            #size_hint: None, None
+            #pos: self.pos
+            #size: self.size
+            cols: 1
+            rows: 1
+            #height: self.minimum_height
+            #row_default_height: 500
+            #row_force_default: True
+            RelativeLayout:
+                Image:
+                    source: 'images/cro_open.jpg'
+                Button:
+                    pos_hint: {'center_x': 0.3, 'center_y': 0.5}
+                    size: 200, 48
+                    size_hint: None, None
+                    text: 'Button'
+
+                Button:
+                    text: "<"
+                    size_hint: (None, None)
+                    size: (40,40)
+                    pos_hint: {"x":0}
+                    on_release:
+                        app.root.current = "main"
+                        root.manager.transition.direction = "right"
+            #Image:
+                #source: 'images/cro_open.jpg'
 
 
 <RoundedButton@Button>
+    background_color: (0,0,0,0)
+    background_normal: ''
     canvas.before:
+        Color:
+            rgba: (0, 194/255, 142/255, 1)
         RoundedRectangle:
             size: self.size
             pos: self.pos
-            radius: [18]
+            radius: [50]
+
