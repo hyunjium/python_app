@@ -46,6 +46,8 @@ class RandomButton(Button):
 
 class CrocWindow(Screen):
     pass
+class LottoWindow(Screen):
+    pass
 class WindowManager(ScreenManager):
     pass
 
