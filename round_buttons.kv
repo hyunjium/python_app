@@ -1,6 +1,7 @@
 WindowManager:
     MainWindow:
     CroWindow:
+    CrocWindow:
 
 <Button>
     font_size: 30
@@ -42,41 +43,123 @@ WindowManager:
 
 <CroWindow>:
     name : "cro"
+    recolorName: resetColor1, resetColor2, resetColor3, resetColor4, resetColor5, resetColor6, resetColor7, resetColor8, resetColor9, resetColor10
+    on_pre_enter: self._update_pos()
+    randomButton_pos: self._random_pos()
 
     BoxLayout:
         orientation: "vertical"
         size: root.width, root.height
 
-        GridLayout:
-            #orientation: "vertical"
-            #size: root.width, root.height
-            #size_hint: None, None
-            #pos: self.pos
-            #size: self.size
-            cols: 1
-            rows: 1
-            #height: self.minimum_height
-            #row_default_height: 500
-            #row_force_default: True
-            RelativeLayout:
-                Image:
-                    source: 'images/cro_open.jpg'
-                Button:
-                    pos_hint: {'center_x': 0.3, 'center_y': 0.5}
-                    size: 200, 48
-                    size_hint: None, None
-                    text: 'Button'
+        Button:
+            text: "<"
+            size_hint: (None, None)
+            size: (40,40)
+            pos_hint: {"x":0}
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
 
+        BackgroundBoxLayout:
+            background_image: 'images/cro_open.jpg'
+            RelativeLayout:
                 Button:
-                    text: "<"
-                    size_hint: (None, None)
-                    size: (40,40)
-                    pos_hint: {"x":0}
+                    id: resetColor1
+                    background_color: (1,1,1,0)
+                    size_hint: (0.14, 0.08)
+                    pos_hint: {"x":0.07, "y":0.35}
+                    on_press: self.background_color= (1,0,0,1)
+                Button:
+                    id: resetColor2
+                    background_color: (1,1,1,0)
+                    size_hint: (0.14, 0.08)
+                    pos_hint: {"x":0.05, "y":0.25}
+                    on_press: self.background_color= (1,0,0,1)
+                Button:
+                    id: resetColor3
+                    background_color: (1,1,1,0)
+                    size_hint: (0.14, 0.08)
+                    pos_hint: {"x":0.05, "y":0.155}
+                    on_press: self.background_color= (1,0,0,1)
+                Button:
+                    id: resetColor4
+                    background_color: (1,1,1,0)
+                    size_hint: (0.14, 0.08)
+                    pos_hint: {"x":0.13, "y":0.07}
+                    on_press: self.background_color= (1,0,0,1)
+                Button:
+                    id: resetColor5
+                    background_color: (1,1,1,0)
+                    size_hint: (0.14, 0.08)
+                    pos_hint: {"x":0.33, "y":0.05}
+                    on_press: self.background_color= (1,0,0,1)
+                Button:
+                    id: resetColor6
+                    background_color: (1,1,1,0)
+                    size_hint: (0.14, 0.08)
+                    pos_hint: {"x":0.55, "y":0.05}
+                    on_press: self.background_color= (1,0,0,1)
+                Button:
+                    id: resetColor7
+                    background_color: (1,1,1,0)
+                    size_hint: (0.14, 0.08)
+                    pos_hint: {"x":0.74, "y":0.07}
+                    on_press: self.background_color= (1,0,0,1)
+                Button:
+                    id: resetColor8
+                    background_color: (1,1,1,0)
+                    size_hint: (0.14, 0.08)
+                    pos_hint: {"x":0.82, "y":0.155}
+                    on_press: self.background_color= (1,0,0,1)
+                Button:
+                    id: resetColor9
+                    background_color: (1,1,1,0)
+                    size_hint: (0.14, 0.08)
+                    pos_hint: {"x":0.81, "y":0.25}
+                    on_press: self.background_color= (1,0,0,1)
+                Button:
+                    id: resetColor10
+                    background_color: (1,1,1,0)
+                    size_hint: (0.14, 0.08)
+                    pos_hint: {"x":0.8, "y":0.35}
+                    on_press: self.background_color= (1,0,0,1)
+
+                RandomButton:
+                    id: random-button
+                    background_color: (1,1,1,1)
+                    size_hint: (0.14, 0.08)
+                    pos_hint: root.randomButton_pos
+                    on_press:
+                        app.root.current = "croc"
+                        root.manager.transition.direction = "left"
+
+
+<CrocWindow>:
+    name : "croc"
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+
+        Button:
+            text: "<"
+            size_hint: (None, None)
+            size: (40,40)
+            pos_hint: {"x":0}
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
+
+        BackgroundBoxLayout:
+            background_image: 'images/cro_close.jpg'
+            RelativeLayout:
+                Button:
+                    background_color: (1,1,1,0)
+                    size_hint: (0.25, 0.14)
+                    pos_hint: {"x":0.38, "y":0.14}
                     on_release:
-                        app.root.current = "main"
+                        app.root.current = "cro"
                         root.manager.transition.direction = "right"
-            #Image:
-                #source: 'images/cro_open.jpg'
+
 
 
 <RoundedButton@Button>
@@ -90,3 +173,10 @@ WindowManager:
             pos: self.pos
             radius: [50]
 
+<BackgroundBoxLayout@BoxLayout>:
+    background_image: 'images/cro_open.jpg'
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: self.background_image
