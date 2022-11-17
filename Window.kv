@@ -1,3 +1,5 @@
+#: import Factory kivy.factory.Factory
+
 WindowManager:
     MainWindow:
     CroWindow:
@@ -183,6 +185,15 @@ WindowManager:
             size: self.size
             source: self.background_image
 
+<MyPopup@Popup>
+    title: "The number is..."
+    size_hint: 0.6, 0.2
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        Label:
+            text: "1"
+            font_size: 36
 
 <LottoWindow>:
     name: "lotto"
@@ -205,6 +216,7 @@ WindowManager:
                     text: "Get!"
                     pos_hint: {'center_x': .51, 'center_y': .49}
                     size_hint: (.3, .24)
+                    on_release: Factory.MyPopup().open()
 
         Button:
             size_hint: (None, None)
