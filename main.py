@@ -48,6 +48,9 @@ class CrocWindow(Screen):
     pass
 class LottoWindow(Screen):
     pass
+class RouletteWindow(Screen):
+    def generate_number(self):
+        self.random_label.text = str(random.randint(0,10))
 class WindowManager(ScreenManager):
     pass
 
@@ -62,8 +65,3 @@ class HelloApp(App):
 
 if __name__ == '__main__':
     HelloApp().run()
-
-
-
-
-

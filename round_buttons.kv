@@ -1,7 +1,10 @@
+#: import Factory kivy.factory.Factory
+
 WindowManager:
     MainWindow:
     CroWindow:
     CrocWindow:
+    LottoWindow:
 
 <Button>
     font_size: 30
@@ -30,6 +33,9 @@ WindowManager:
 
         RoundedButton:
             text: "Lotto number"
+            on_release:
+                app.root.current = "lotto"
+                root.manager.transition.direction = "left"
 
         RoundedButton:
             text: "Roulette"
@@ -61,7 +67,6 @@ WindowManager:
                 root.manager.transition.direction = "right"
 
         BackgroundBoxLayout:
-            background_image: 'images/cro_open.jpg'
             RelativeLayout:
                 Button:
                     id: resetColor1
@@ -126,7 +131,7 @@ WindowManager:
 
                 RandomButton:
                     id: random-button
-                    background_color: (1,1,1,1)
+                    background_color: (1,1,1,0)
                     size_hint: (0.14, 0.08)
                     pos_hint: root.randomButton_pos
                     on_press:
@@ -161,7 +166,6 @@ WindowManager:
                         root.manager.transition.direction = "right"
 
 
-
 <RoundedButton@Button>
     background_color: (0,0,0,0)
     background_normal: ''
@@ -175,6 +179,54 @@ WindowManager:
 
 <BackgroundBoxLayout@BoxLayout>:
     background_image: 'images/cro_open.jpg'
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: self.background_image
+
+<MyPopup@Popup>
+    title: "The number is..."
+    size_hint: 0.6, 0.2
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        Label:
+            text: "1"
+            font_size: 36
+
+<LottoWindow>:
+    name: "lotto"
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+
+        Button:
+            text: "<"
+            size_hint: (None, None)
+            size: (40,40)
+            pos_hint: {"x":0}
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
+
+        BackgroundLottoLayout:
+            RelativeLayout:
+                RoundedButton:
+                    text: "Get!"
+                    pos_hint: {'center_x': .51, 'center_y': .49}
+                    size_hint: (.3, .24)
+                    on_release: Factory.MyPopup().open()
+
+        Button:
+            size_hint: (None, None)
+            size: (80, 150)
+
+
+
+
+<BackgroundLottoLayout@BoxLayout>:
+    background_image: 'images/lotto.jpg'
     canvas.before:
         Rectangle:
             pos: self.pos
