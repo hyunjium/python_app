@@ -1,4 +1,5 @@
 import random
+import re
 
 from kivy.app import App
 from kivy.properties import ObjectProperty
@@ -47,7 +48,24 @@ class RandomButton(Button):
 class CrocWindow(Screen):
     pass
 class LottoWindow(Screen):
-    pass
+    def generate_number(self):
+        prior = self.lotto_number.text
+        for i in range(10):
+            number = str(random.randint(1, 45))
+            if prior == '_':
+                self.random_label.text = number
+                self.lotto_number.text = f'{number}'
+                break
+            elif number in re.findall(r'\b\d+\b', prior):
+                continue
+            elif len(re.findall(r'\b\d+\b', prior)) == 7:
+                break
+            else:
+                self.random_label.text = number
+                self.lotto_number.text = f'{prior}{" "}{number}'
+                break
+
+
 class RouletteWindow(Screen):
     def generate_number(self):
         self.random_label.text = str(random.randint(0,10))

@@ -5,6 +5,7 @@ WindowManager:
     CroWindow:
     CrocWindow:
     LottoWindow:
+    RouletteWindow:
 
 <Button>
     font_size: 30
@@ -39,6 +40,9 @@ WindowManager:
 
         RoundedButton:
             text: "Roulette"
+            on_release:
+                app.root.current = "rou"
+                root.manager.transition.direction = "left"
 
         RoundedButton:
             text: "Crocodile"
@@ -185,18 +189,13 @@ WindowManager:
             size: self.size
             source: self.background_image
 
-<MyPopup@Popup>
-    title: "The number is..."
-    size_hint: 0.6, 0.2
-    BoxLayout:
-        orientation: "vertical"
-        size: root.width, root.height
-        Label:
-            text: "1"
-            font_size: 36
+
 
 <LottoWindow>:
     name: "lotto"
+    random_label: random_label
+    lotto_number: lotto_number
+
     BoxLayout:
         orientation: "vertical"
         size: root.width, root.height
@@ -216,12 +215,28 @@ WindowManager:
                     text: "Get!"
                     pos_hint: {'center_x': .51, 'center_y': .49}
                     size_hint: (.3, .24)
-                    on_release: Factory.MyPopup().open()
+                    on_press: root.generate_number()
 
-        Button:
-            size_hint: (None, None)
-            size: (80, 150)
+                Label:
+                    id: lotto_number
+                    text: "_"
+                    font_size: 30
+                    color: (13/255, 133/255, 0, 1)
+                    pos_hint: {"x":0, "y":0.1}
 
+
+        Label:
+            text: "The number is..."
+            font_size: 20
+            color: (13/255, 133/255, 0, 1)
+            size_hint: 0.5, 0.1
+
+        Label:
+            id: random_label
+            text: "_"
+            font_size: 30
+            color: (13/255, 133/255, 0, 1)
+            size_hint: 1, 0.2
 
 
 
@@ -232,3 +247,34 @@ WindowManager:
             pos: self.pos
             size: self.size
             source: self.background_image
+
+
+<RouletteWindow>:
+    name: "rou"
+    random_label: random_label
+
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        Button:
+            text: "<"
+            size_hint: (None, None)
+            size: (40,40)
+            pos_hint: {"x":0}
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
+        Label:
+            text: "Random Number"
+            font_size: 30
+            color: 0, 0.62, 0.96
+
+        Label:
+            id: random_label
+            text: "_"
+            font_size: 30
+
+        Button:
+            text: "Generate"
+            font_size: 15
+            on_press: root.generate_number()
