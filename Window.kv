@@ -243,6 +243,14 @@ WindowManager:
                 random_label.text = '_'
                 lotto_number.text = '_'
 
+        Button:
+            text: "Get more"
+            size_hint: (None, None)
+            size: (60,50)
+            on_release:
+                root.generate_more_number()
+
+
 
 
 <RouletteWindow>:

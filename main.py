@@ -50,21 +50,53 @@ class CrocWindow(Screen):
 class LottoWindow(Screen):
     def generate_number(self):
         prior = self.lotto_number.text
-        for i in range(10):
-            number = str(random.randint(1, 45))
-            if prior == '_':
-                self.random_label.text = number
-                self.lotto_number.text = f'{number}'
-                break
-            elif number in re.findall(r'\b\d+\b', prior):
-                continue
-            elif len(re.findall(r'\b\d+\b', prior)) == 7:
-                self.random_label.text = "You got all numbers!"
-                break
-            else:
-                self.random_label.text = number
-                self.lotto_number.text = f'{prior}{" "}{number}'
-                break
+        line = prior.splitlines()
+        linelen = len(line)
+        if len(line) == 1:
+            for i in range(10):
+                number = str(random.randint(1, 45))
+                if prior == '_':
+                    self.random_label.text = number
+                    self.lotto_number.text = f'{number}'
+                    break
+                elif number in re.findall(r'\b\d+\b', prior):
+                    continue
+                elif len(re.findall(r'\b\d+\b', prior)) == 7:
+                    self.random_label.text = "You got all numbers!"
+                    break
+                else:
+                    self.random_label.text = number
+                    self.lotto_number.text = f'{prior}{" "}{number}'
+                    break
+        elif linelen >= 2:
+            for i in range(10):
+                number = str(random.randint(1, 45))
+                if '_' in prior:
+                    self.random_label.text = number
+                    line[linelen-1] = ''
+                    all_num = ' '
+                    for x in line:
+                        all_num += '\n' + x
+                    self.lotto_number.text = f'{all_num}{number}'
+                    break
+                elif number in re.findall(r'\b\d+\b', line[linelen-1]):
+                    continue
+                elif len(re.findall(r'\b\d+\b', line[linelen-1])) == 7:
+                    self.random_label.text = "You got all numbers!"
+                    break
+                else:
+                    self.random_label.text = number
+                    self.lotto_number.text = f'{prior}{" "}{number}'
+                    break
+
+    def generate_more_number(self):
+        prior = self.lotto_number.text
+        if '_' not in prior:
+            self.random_label.text = '_'
+            self.lotto_number.text = f'{prior}\n{"_"}'
+
+
+
 
 
 class RouletteWindow(Screen):
