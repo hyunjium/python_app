@@ -59,6 +59,7 @@ class LottoWindow(Screen):
             elif number in re.findall(r'\b\d+\b', prior):
                 continue
             elif len(re.findall(r'\b\d+\b', prior)) == 7:
+                self.random_label.text = "You got all numbers!"
                 break
             else:
                 self.random_label.text = number
