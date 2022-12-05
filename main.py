@@ -57,7 +57,10 @@ class LottoWindow(Screen):
                 number = str(random.randint(1, 45))
                 if prior == '_':
                     self.random_label.text = number
-                    self.lotto_number.text = f'{number}'
+                    if int(number) <= 9:
+                        self.lotto_number.text = f'{0}{number}'
+                    else:
+                        self.lotto_number.text = f'{number}'
                     break
                 elif number in re.findall(r'\b\d+\b', prior):
                     continue
@@ -66,7 +69,10 @@ class LottoWindow(Screen):
                     break
                 else:
                     self.random_label.text = number
-                    self.lotto_number.text = f'{prior}{" "}{number}'
+                    if int(number) <= 9:
+                        self.lotto_number.text = f'{prior}{" "}{0}{number}'
+                    else:
+                        self.lotto_number.text = f'{prior}{" "}{number}'
                     break
         elif linelen >= 2:
             for i in range(10):
@@ -80,7 +86,10 @@ class LottoWindow(Screen):
                             all_num += x
                         else:
                             all_num += x + '\n'
-                    self.lotto_number.text = f'{all_num}{number}'
+                    if int(number) <= 9:
+                        self.lotto_number.text = f'{all_num}{0}{number}'
+                    else:
+                        self.lotto_number.text = f'{all_num}{number}'
                     break
                 elif number in re.findall(r'\b\d+\b', line[linelen-1]):
                     continue
@@ -89,7 +98,10 @@ class LottoWindow(Screen):
                     break
                 else:
                     self.random_label.text = number
-                    self.lotto_number.text = f'{prior}{" "}{number}'
+                    if int(number) <= 9:
+                        self.lotto_number.text = f'{prior}{" "}{0}{number}'
+                    else:
+                        self.lotto_number.text = f'{prior}{" "}{number}'
                     break
 
     def generate_more_number(self):
