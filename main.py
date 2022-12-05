@@ -74,9 +74,12 @@ class LottoWindow(Screen):
                 if '_' in prior:
                     self.random_label.text = number
                     line[linelen-1] = ''
-                    all_num = ' '
+                    all_num = ''
                     for x in line:
-                        all_num += '\n' + x
+                        if x == line[linelen - 1]:
+                            all_num += x
+                        else:
+                            all_num += x + '\n'
                     self.lotto_number.text = f'{all_num}{number}'
                     break
                 elif number in re.findall(r'\b\d+\b', line[linelen-1]):
@@ -91,9 +94,10 @@ class LottoWindow(Screen):
 
     def generate_more_number(self):
         prior = self.lotto_number.text
-        if '_' not in prior:
-            self.random_label.text = '_'
-            self.lotto_number.text = f'{prior}\n{"_"}'
+        if len(re.findall(r'\b\d+\b', prior)) <= 34:
+            if '_' not in prior:
+                self.random_label.text = '_'
+                self.lotto_number.text = f'{prior}\n{"_"}'
 
 
 
