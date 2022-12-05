@@ -262,6 +262,7 @@ WindowManager:
 
 <RouletteWindow>:
     name: "rou"
+    on_pre_enter: self.reset_page()
 
     BoxLayout:
         orientation: "vertical"
@@ -364,8 +365,3 @@ WindowManager:
             font_size: 35
             color: (13/255, 133/255, 0, 1)
             size_hint: (1, 0.5)
-
-
-
-
-

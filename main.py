@@ -114,6 +114,22 @@ class LottoWindow(Screen):
 
 
 class RouletteWindow(Screen):
+    def reset_page(self):
+        self.ids.number_option.text = "# of Options: 1"
+        self.ids.option1.text = ''
+        self.ids.option2.text = ''
+        self.ids.option3.text = ''
+        self.ids.option4.text = ''
+        self.ids.option5.text = ''
+        self.ids.option6.text = ''
+        self.ids.plus_button.text = "+"
+        self.ids.answer.text = "Answer is..."
+        self.ids.option2.background_color = (1, 1, 1, 0)
+        self.ids.option3.background_color = (1, 1, 1, 0)
+        self.ids.option4.background_color = (1, 1, 1, 0)
+        self.ids.option5.background_color = (1, 1, 1, 0)
+        self.ids.option6.background_color = (1, 1, 1, 0)
+
     def select_option(self):
         number_of_options = self.ids.number_option.text
         if '1' in number_of_options:

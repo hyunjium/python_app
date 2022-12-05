@@ -200,6 +200,8 @@ WindowManager:
         orientation: "vertical"
         size: root.width, root.height
 
+        spacing: 15
+
         Button:
             text: "<"
             size_hint: (None, None)
@@ -211,55 +213,63 @@ WindowManager:
 
         Label:
             text: "The number is..."
-            font_size: 20
+            font_size: 25
             color: (13/255, 133/255, 0, 1)
-            size_hint: 0.5, 0.1
-
-        Label:
-            id: random_label
-            text: "_"
-            font_size: 30
-            color: (13/255, 133/255, 0, 1)
-            size_hint: 1, 0.2
-
-        Label:
-            id: lotto_number
-            text: "_"
-            font_size: 30
-            color: (13/255, 133/255, 0, 1)
-            pos_hint: {"x":0, "y":0.1}
+            size_hint: 0.6, 0.1
 
         RoundedButton:
-            text: "Get!"
-            pos_hint: {'center_x': .51, 'center_y': .49}
-            size_hint: (.3, .24)
-            on_press: root.generate_number()
+            id: random_label
+            text: "_"
+            size_hint: (.23, .25)
 
         Button:
             text: "Reset"
+            font_size: 25
             size_hint: (None, None)
-            size: (60,50)
+            size: (200,40)
+            pos_hint: {'center_x': .5, 'center_y': .9}
             on_release:
                 random_label.text = '_'
                 lotto_number.text = '_'
 
+        Label:
+            id: lotto_number
+            text: "_"
+            text_size: self.size
+            halign: "center"
+            valign: "top"
+            size_hint: 1, 1
+            font_size: 30
+            color: (13/255, 133/255, 0, 1)
+
         Button:
             text: "Get more"
+            font_size: 25
             size_hint: (None, None)
-            size: (60,50)
+            size: (300,50)
             on_release:
                 root.generate_more_number()
+
+        Button:
+            text: "Get!"
+            font_size: 25
+            size_hint: (None, None)
+            size: (300,55)
+            on_press: root.generate_number()
 
 
 
 
 <RouletteWindow>:
     name: "rou"
-    random_label: random_label
+    on_pre_enter: self.reset_page()
 
     BoxLayout:
         orientation: "vertical"
         size: root.width, root.height
+
+        spacing: 15
+
         Button:
             text: "<"
             size_hint: (None, None)
@@ -268,17 +278,90 @@ WindowManager:
             on_release:
                 app.root.current = "main"
                 root.manager.transition.direction = "right"
-        Label:
-            text: "Random Number"
-            font_size: 30
-            color: 0, 0.62, 0.96
 
         Label:
-            id: random_label
-            text: "_"
-            font_size: 30
+            text: "Write Options"
+            font_size: 35
+            color: (13/255, 133/255, 0, 1)
+            size_hint: (1, 0.3)
+
+        Label:
+            id: number_option
+            text: "# of Options: 1"
+            font_size: 20
+            color: (13/255, 133/255, 0, 1)
+            size_hint: (1, 0.2)
+
+        TextInput:
+            id: option1
+            multiline: False
+            halign: "left"
+            font_size: 20
+            size_hint: (0.8, 0.2)
+            pos_hint: {"x":0.1}
+
+        TextInput:
+            id: option2
+            multiline: False
+            halign: "left"
+            font_size: 20
+            size_hint: (0.8, 0.2)
+            pos_hint: {"x":0.1}
+            background_color: (1,1,1,0)
+
+        TextInput:
+            id: option3
+            multiline: False
+            halign: "left"
+            font_size: 20
+            size_hint: (0.8, 0.2)
+            pos_hint: {"x":0.1}
+            background_color: (1,1,1,0)
+
+
+        TextInput:
+            id: option4
+            multiline: False
+            halign: "left"
+            font_size: 20
+            size_hint: (0.8, 0.2)
+            pos_hint: {"x":0.1}
+            background_color: (1,1,1,0)
+
+        TextInput:
+            id: option5
+            multiline: False
+            halign: "left"
+            font_size: 20
+            size_hint: (0.8, 0.2)
+            pos_hint: {"x":0.1}
+            background_color: (1,1,1,0)
+
+        TextInput:
+            id: option6
+            multiline: False
+            halign: "left"
+            font_size: 20
+            size_hint: (0.8, 0.2)
+            pos_hint: {"x":0.1}
+            background_color: (1,1,1,0)
 
         Button:
-            text: "Generate"
-            font_size: 15
-            on_press: root.generate_number()
+            id: plus_button
+            text: "+"
+            font_size: 35
+            size_hint: (0.15,0.3)
+            on_press: root.add_option()
+
+        Button:
+            text: "Answer Me!"
+            font_size: 30
+            size_hint: (0.8,0.3)
+            on_press: root.select_option()
+
+        Label:
+            id: answer
+            text: "Answer is..."
+            font_size: 35
+            color: (13/255, 133/255, 0, 1)
+            size_hint: (1, 0.5)
