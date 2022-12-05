@@ -113,11 +113,73 @@ class LottoWindow(Screen):
 
 
 
-
-
 class RouletteWindow(Screen):
-    def generate_number(self):
-        self.random_label.text = str(random.randint(0,10))
+    def select_option(self):
+        number_of_options = self.ids.number_option.text
+        if '1' in number_of_options:
+            answer = self.ids.option1.text
+            self.ids.answer.text = answer
+        elif '2' in number_of_options:
+            answer = random.choice((self.ids.option1.text,
+                                    self.ids.option2.text))
+            self.ids.answer.text = answer
+        elif '3' in number_of_options:
+            answer = random.choice((self.ids.option1.text,
+                                    self.ids.option2.text,
+                                    self.ids.option3.text))
+            self.ids.answer.text = answer
+        elif '4' in number_of_options:
+            answer = random.choice((self.ids.option1.text,
+                                    self.ids.option2.text,
+                                    self.ids.option3.text,
+                                    self.ids.option4.text))
+            self.ids.answer.text = answer
+        elif '5' in number_of_options:
+            answer = random.choice((self.ids.option1.text,
+                                    self.ids.option2.text,
+                                    self.ids.option3.text,
+                                    self.ids.option4.text,
+                                    self.ids.option5.text))
+            self.ids.answer.text = answer
+        else:
+            answer = random.choice((self.ids.option1.text,
+                                    self.ids.option2.text,
+                                    self.ids.option3.text,
+                                    self.ids.option4.text,
+                                    self.ids.option5.text,
+                                    self.ids.option6.text))
+            self.ids.answer.text = answer
+
+
+    def add_option(self):
+        number_of_options = self.ids.number_option.text
+        if '1' in number_of_options:
+            self.ids.option2.background_color = (1,1,1,1)
+            self.ids.number_option.text = "# of Options: 2"
+        elif '2' in number_of_options:
+            self.ids.option2.background_color = (1, 1, 1, 1)
+            self.ids.option3.background_color = (1, 1, 1, 1)
+            self.ids.number_option.text = "# of Options: 3"
+        elif '3' in number_of_options:
+            self.ids.option2.background_color = (1, 1, 1, 1)
+            self.ids.option3.background_color = (1, 1, 1, 1)
+            self.ids.option4.background_color = (1, 1, 1, 1)
+            self.ids.number_option.text = "# of Options: 4"
+        elif '4' in number_of_options:
+            self.ids.option2.background_color = (1, 1, 1, 1)
+            self.ids.option3.background_color = (1, 1, 1, 1)
+            self.ids.option4.background_color = (1, 1, 1, 1)
+            self.ids.option5.background_color = (1, 1, 1, 1)
+            self.ids.number_option.text = "# of Options: 5"
+        else:
+            self.ids.option2.background_color = (1, 1, 1, 1)
+            self.ids.option3.background_color = (1, 1, 1, 1)
+            self.ids.option4.background_color = (1, 1, 1, 1)
+            self.ids.option5.background_color = (1, 1, 1, 1)
+            self.ids.option6.background_color = (1, 1, 1, 1)
+            self.ids.number_option.text = "# of Options: 6"
+            self.ids.plus_button.text = '.'
+
 class WindowManager(ScreenManager):
     pass
 
