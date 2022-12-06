@@ -31,7 +31,6 @@ WindowManager:
             bold: True
             italic: True
 
-
         RoundedButton:
             text: "Lotto number"
             on_release:
@@ -190,7 +189,6 @@ WindowManager:
             source: self.background_image
 
 
-
 <LottoWindow>:
     name: "lotto"
     random_label: random_label
@@ -258,8 +256,6 @@ WindowManager:
             on_press: root.generate_number()
 
 
-
-
 <RouletteWindow>:
     name: "rou"
     on_pre_enter: self.reset_page()
@@ -317,7 +313,6 @@ WindowManager:
             size_hint: (0.8, 0.2)
             pos_hint: {"x":0.1}
             background_color: (1,1,1,0)
-
 
         TextInput:
             id: option4

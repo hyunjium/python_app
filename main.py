@@ -112,7 +112,6 @@ class LottoWindow(Screen):
                 self.lotto_number.text = f'{prior}\n{"_"}'
 
 
-
 class RouletteWindow(Screen):
     def reset_page(self):
         self.ids.number_option.text = "# of Options: 1"
@@ -166,7 +165,6 @@ class RouletteWindow(Screen):
                                     self.ids.option6.text))
             self.ids.answer.text = answer
 
-
     def add_option(self):
         number_of_options = self.ids.number_option.text
         if '1' in number_of_options:
@@ -200,7 +198,6 @@ class WindowManager(ScreenManager):
     pass
 
 kv = Builder.load_file('Window.kv')
-
 
 class HelloApp(App):
     def build(self):
