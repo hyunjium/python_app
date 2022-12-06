@@ -33,5 +33,5 @@ Answer Me! 버튼을 누르면 입력한 option 중 하나가 뽑혀서, Answer 
 
 각 화면의 왼쪽 상단에는 메인 화면으로 돌아갈 수 있는 버튼이 있다.  
 
-참고 자료:  
-사진 출처:
+참고 자료: https://www.youtube.com/playlist?list=PLCC34OHNcOtpz7PJQ7Tv7hqFBP_xDDjqg  
+악어 사진 출처: https://play.google.com/store/apps/details?id=com.OVJECT.CrocoR&hl=ko&gl=US&pli=1
